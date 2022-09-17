@@ -1,1 +1,54 @@
-<h2>hello world. this is index</h2>
+<div class="container">
+  <form action="/" method="POST">
+    <div class="row">
+      <!-- 表單設為必填 -->
+      <input
+        class="form-control mt-5"
+        id="fullURL"
+        type="url"
+        name="fullURL"
+        placeholder="input URL here"
+        aria-label="input URL here"
+        required
+      />
+    </div>
+
+    <div
+      class="container mt-3"
+      style="display:flex; align-items:center; flex-direction:column;"
+    >
+      <button type="submit" class="btn btn-outline-primary">Shorten</button>
+    </div>
+  </form>
+
+  {{#if fullURL}}
+
+    <div
+      class="container mt-3 alert alert-success"
+      style="display:flex; align-items:center;flex-direction:column"
+    >
+      <h2>Success! Please use this link:</h2>
+      <input
+        class="form-control"
+        id="shortURL"
+        type="text"
+        style="text-align:center; color:blue; background:transparent; border:none"
+        value="http://{{host}}/{{shortURL}}"
+        aria-label="shortURL"
+        disabled
+        readonly
+      />
+      <button
+        type="button"
+        onclick="copy()"
+        class="btn btn-outline-success mt-3"
+      >Copy</button>
+    </div>
+  {{/if}}
+  {{! 複製連結功能 }}
+  <script>
+    function copy() { const URL = document.querySelector('#shortURL')
+    navigator.clipboard.writeText(URL.value) .then(() => alert('Link copied.'))
+    .catch(error => console.log(error)) }
+  </script>
+</div>
